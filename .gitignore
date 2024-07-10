@@ -33,11 +33,5 @@ dist/
 build/
 workspace/
 
-# GitHub files
-.github/
-
-# Goreleaser files
-.goreleaser.yml
-
 # Other
 .DS_Store

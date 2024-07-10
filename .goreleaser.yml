@@ -1,0 +1,36 @@
+version: 2
+
+project_name: "clio"
+
+builds:
+  - id: build
+    main: .
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+release:
+  github:
+    owner: "gptscript-ai"
+    name: "clio"
+
+brews:
+  - name: clio
+    description: "Clio CLI"
+    repository:
+      owner: gptscript-ai
+      name: homebrew-tap
+    install: |
+      bin.install "clio"
+    homepage: "https://github.com/gptscript-ai/clio"
