@@ -1,0 +1,43 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output of the Go compiler
+*.o
+*.a
+*.out
+
+# Go workspace file
+go.work
+go.work.sum
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Dependency directories
+bin/
+dist/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# Build directories
+build/
+workspace/
+
+# GitHub files
+.github/
+
+# Goreleaser files
+.goreleaser.yml
+
+# Other
+.DS_Store

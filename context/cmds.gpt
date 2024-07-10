@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CMDS="kubectl helm brew aws k3d eksctl kind minikube git gh trivy"
+
+echo 'The additional CLI commands are available locally, use the `exec` tool to invoke them:'
+
+for i in $CMDS; do
+    if [ -e "$(command -v $i)" ]; then
+        echo '  ' $i
+    fi
+done

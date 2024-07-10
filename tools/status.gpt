@@ -1,0 +1,15 @@
+name: Cluster Status
+description: Inspects the current cluster and returns a summary of the cluster and it's state.
+context: ../context
+
+Run the following commands with the exec tool to get an idea of the cluster state. Don't echo the output.
+
+1. kubectl get pods -A -o wide
+1. kubectl get nodes -A -o wide
+1. kubectl get services -A -o wide
+1. helm list -A
+1. kuebctl config view
+
+Give a consolidate summary of the state of the cluster without explicitly listing everything.
+Run any additional commands to try to determine the cluster provider implementation.
+Point out anything that may be wrong with the cluster and needs further investigation.
