@@ -3,7 +3,7 @@ description: This is the global context that all Clio tools should reference.
 
 share context: github.com/gptscript-ai/context/cli
 share context: github.com/gptscript-ai/context/workspace
-share context: ../../context/multi-agent
+share context: github.com/gptscript-ai/context/multi-agent
 
 share context: ./cmds.gpt
 
