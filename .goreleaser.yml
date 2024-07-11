@@ -28,9 +28,12 @@ release:
 brews:
   - name: clio
     description: "Clio CLI"
-    repository:
-      owner: gptscript-ai
-      name: homebrew-tap
     install: |
       bin.install "clio"
     homepage: "https://github.com/gptscript-ai/clio"
+    skip_upload: false
+    directory: "Formula"
+    repository:
+      owner: gptscript-ai
+      name: homebrew-tap
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
