@@ -2,19 +2,13 @@ module github.com/gptscript-ai/clio
 
 go 1.22.4
 
-replace (
-	github.com/gptscript-ai/go-gptscript => ../go-gptscript
-	github.com/gptscript-ai/gptscript => ../gptscript
-	github.com/gptscript-ai/tui => ../tui
-)
-
 require (
 	github.com/acorn-io/cmd v0.0.0-20240625164600-6c594fbd857e
 	github.com/adrg/xdg v0.4.0
 	github.com/google/uuid v1.6.0
-	github.com/gptscript-ai/go-gptscript v0.9.1
-	github.com/gptscript-ai/gptscript v0.0.0-00010101000000-000000000000
-	github.com/gptscript-ai/tui v0.0.0-20240702222655-901e7ec1faf5
+	github.com/gptscript-ai/go-gptscript v0.9.2
+	github.com/gptscript-ai/gptscript v0.9.3-0.20240710235955-1f9e86d573a6
+	github.com/gptscript-ai/tui v0.0.0-20240711000046-770071066d8e
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
