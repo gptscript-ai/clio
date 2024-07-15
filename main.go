@@ -3,17 +3,21 @@ package main
 import (
 	"context"
 	"embed"
-	"github.com/acorn-io/cmd"
-	"github.com/adrg/xdg"
-	"github.com/gptscript-ai/go-gptscript"
-	"github.com/gptscript-ai/gptscript/pkg/embedded"
-	"github.com/gptscript-ai/clio/internal"
-	"github.com/gptscript-ai/tui"
-	"github.com/spf13/cobra"
+	"errors"
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/acorn-io/cmd"
+	"github.com/adrg/xdg"
+	"github.com/fatih/color"
+	"github.com/gptscript-ai/clio/internal"
+	"github.com/gptscript-ai/go-gptscript"
+	"github.com/gptscript-ai/gptscript/pkg/embedded"
+	"github.com/gptscript-ai/tui"
+	"github.com/spf13/cobra"
 )
 
 //go:embed agent.gpt context/*.gpt tools/*.gpt agents/*.gpt
@@ -35,17 +39,21 @@ func (internalFS) Open(name string) (fs.File, error) {
 type Clio struct {
 	BaseURL string `usage:"OpenAI base URL" name:"openai-base-url" env:"OPENAI_BASE_URL"`
 	APIKey  string `usage:"OpenAI API KEY" name:"openai-api-key" env:"OPENAI_API_KEY"`
+	LogFile string `usage:"Event log file"`
 }
 
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 	if c.APIKey == "" {
+		fmt.Println(color.YellowString("Checking authentication..."))
 		c.APIKey, c.BaseURL, err = internal.TokenAndURL(cmd.Context(), internal.AppName)
 		if err != nil {
 			return err
 		}
 	}
 
-	tool, err := getTool(c.BaseURL, c.APIKey)
+	fmt.Println(color.YellowString("Starting up... (first run takes longer, like a minute, be patient this will get faster)"))
+
+	tool, err := getTool(c.BaseURL, c.APIKey, args)
 	if err != nil {
 		return err
 	}
@@ -55,7 +63,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	return tui.Run(context.Background(), internal.AppName, tui.RunOptions{
+	return tui.Run(context.Background(), mainAgent, tui.RunOptions{
 		Eval:    []gptscript.ToolDef{tool},
 		AppName: internal.AppName,
 		TrustedRepoPrefixes: []string{
@@ -64,10 +72,32 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		OpenAIBaseURL: c.BaseURL,
 		OpenAIAPIKey:  c.APIKey,
 		Workspace:     workspace,
+		Location:      mainAgent,
+		EventLog:      c.LogFile,
 	})
 }
 
-func getTool(url, key string) (tool gptscript.ToolDef, _ error) {
+func agentsFromHomeConfig() (result []string, _ error) {
+	dir, err := xdg.ConfigFile(internal.AppName + "/agents")
+	if err != nil {
+		return nil, err
+	}
+
+	files, err := os.ReadDir(dir)
+	if errors.Is(err, fs.ErrNotExist) {
+		return nil, nil
+	} else if err != nil {
+		return nil, err
+	}
+
+	for _, f := range files {
+		result = append(result, filepath.Join(dir, f.Name()))
+	}
+
+	return
+}
+
+func getTool(url, key string, args []string) (tool gptscript.ToolDef, _ error) {
 	c, err := gptscript.NewGPTScript(gptscript.GlobalOptions{
 		OpenAIBaseURL: url,
 		OpenAIAPIKey:  key,
@@ -88,10 +118,20 @@ func getTool(url, key string) (tool gptscript.ToolDef, _ error) {
 		}
 	}
 
-	addons := os.Args[1:]
-	if len(addons) > 0 {
+	if tool.Name == "" {
+		return tool, errors.New("failed to find tool " + mainAgent)
+	}
+
+	toolsFromConfig, err := agentsFromHomeConfig()
+	if err != nil {
+		return tool, err
+	}
+
+	tool.Agents = append(tool.Agents, toolsFromConfig...)
+
+	if len(args) > 0 {
 		return gptscript.ToolDef{
-			Agents: append(addons, tool.Agents...),
+			Agents: append(args, tool.Agents...),
 		}, nil
 	}
 

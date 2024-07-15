@@ -6,9 +6,9 @@ require (
 	github.com/acorn-io/cmd v0.0.0-20240625164600-6c594fbd857e
 	github.com/adrg/xdg v0.4.0
 	github.com/google/uuid v1.6.0
-	github.com/gptscript-ai/go-gptscript v0.9.2
-	github.com/gptscript-ai/gptscript v0.9.3-0.20240710235955-1f9e86d573a6
-	github.com/gptscript-ai/tui v0.0.0-20240711000046-770071066d8e
+	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240715172623-8176fb20c5cb
+	github.com/gptscript-ai/gptscript v0.9.3-0.20240713053221-9ca6e9332a63
+	github.com/gptscript-ai/tui v0.0.0-20240715172746-8540e230b5f7
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
