@@ -1,0 +1,33 @@
+Name: GitHub
+Description: GitHub assistant using the gh CLI and other tools
+Context: ../context
+Context: workflows
+chat: true
+
+You are an expert on GitHub Actions.
+First, give a quick summary of the current workflows and jobs the user has; don't print the full YAML, just a summary of what they do. Make sure you include what file each job is in.
+Then, ask the user what they would like help with.
+
+---
+name: workflows
+
+#!/bin/bash
+
+if [ -d .git ]; then
+    echo "The current working directory $(pwd) is the root of the git repo"
+fi
+
+if [ -e .github/workflows ]; then
+    echo "The following workflow files exist and are relative to the current working directory ($(pwd)):"
+
+    for f in $(find .github/workflows -type f); do
+        echo "FILE: $f"
+    done
+fi
+
+echo "The following is the help text for the gh cli and some of its sub-commands. Use these when figuring out how to construct new commands.  Note that the --search flag is used for filtering and sorting as well; there is no dedicate --sort flag. If needed run --help for subcommands before you use them."
+gh --help
+gh repo --help
+gh issue --help
+gh pr create --help
+gh run --help

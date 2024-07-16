@@ -5,10 +5,11 @@ go 1.22.4
 require (
 	github.com/acorn-io/cmd v0.0.0-20240625164600-6c594fbd857e
 	github.com/adrg/xdg v0.4.0
+	github.com/fatih/color v1.17.0
 	github.com/google/uuid v1.6.0
 	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240715172623-8176fb20c5cb
-	github.com/gptscript-ai/gptscript v0.9.3-0.20240713053221-9ca6e9332a63
-	github.com/gptscript-ai/tui v0.0.0-20240715172746-8540e230b5f7
+	github.com/gptscript-ai/gptscript v0.9.3-0.20240716054330-6e92ee7aa838
+	github.com/gptscript-ai/tui v0.0.0-20240716053605-ecddbcf60eac
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
@@ -36,7 +37,6 @@ require (
 	github.com/docker/cli v26.0.0+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.8.1 // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
-	github.com/fatih/color v1.17.0 // indirect
 	github.com/getkin/kin-openapi v0.124.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
 	github.com/go-openapi/swag v0.22.8 // indirect

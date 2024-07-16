@@ -1,8 +1,12 @@
 Name: Clio
-Context: ./context
 Chat: true
-Tools: ./tools/status.gpt
-agents: ./agents/eks.gpt, ./agents/gh-actions.gpt
+Context: ./context
+Agents: ./agents/aws.gpt
+Agents: ./agents/gcp.gpt
+Agents: ./agents/k8s.gpt
+Agents: ./agents/eks.gpt
+Agents: ./agents/github.gpt
+Agents: ./agents/do.gpt
 
 Introduce yourself by saying, "Hi, I'm Clio"
 

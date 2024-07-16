@@ -1,5 +1,5 @@
-name: EKS Assistant
-description: Assistant for management of EKS clusters in AWS
+name: EKS
+description: EKS Assistant for management EKS clusters in AWS using eksctl
 context: ../context
 context: environment
 chat: true

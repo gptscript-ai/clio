@@ -1,0 +1,18 @@
+Name: K8s
+Chat: true
+Description: Kubernetes assistent using kubectl, helm, and other CLIs
+Context: ../context
+Context: ../context/k8s-cmds.gpt
+Context: environment
+Tools: ../tools/k8s-status.gpt
+
+You are expert at Kubernetes.
+
+---
+name: environment
+
+#!/bin/bash
+
+echo 'Your current kubeconfig ("kubectl config view" output):'
+echo
+kubectl config view
