@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/acorn-io/cmd"
@@ -53,7 +54,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 
 	fmt.Println(color.YellowString("Starting up... (first run takes longer, like a minute, be patient this will get faster)"))
 
-	tool, err := getTool(c.BaseURL, c.APIKey, args)
+	tool, err := getTool(cmd.Context(), c.BaseURL, c.APIKey, args)
 	if err != nil {
 		return err
 	}
@@ -77,7 +78,32 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 	})
 }
 
-func agentsFromHomeConfig() (result []string, _ error) {
+func validateScript(ctx context.Context, c gptscript.GPTScript, path string) (string, error) {
+	absPath, err := filepath.Abs(path)
+	if err != nil {
+		return "", err
+	}
+
+	nodes, err := c.Parse(ctx, absPath)
+	if err != nil {
+		return "", err
+	}
+
+	for _, node := range nodes {
+		if node.ToolNode != nil {
+			if !node.ToolNode.Tool.Chat || !slices.Contains(node.ToolNode.Tool.Context, internal.Context) {
+				return "", fmt.Errorf("invalid agent file: %s, agents must include 'chat: true' and 'context: %s'",
+					path, internal.Context)
+			}
+			return absPath, nil
+		}
+	}
+
+	return "", fmt.Errorf("invalid agent file: %s, agents must include 'chat: true' and 'context: %s' in the first "+
+		"tool definition", path, internal.Context)
+}
+
+func agentsFromHomeConfig(ctx context.Context, c gptscript.GPTScript) (result []string, _ error) {
 	dir, err := xdg.ConfigFile(internal.AppName + "/agents")
 	if err != nil {
 		return nil, err
@@ -91,13 +117,18 @@ func agentsFromHomeConfig() (result []string, _ error) {
 	}
 
 	for _, f := range files {
-		result = append(result, filepath.Join(dir, f.Name()))
+		path, err := validateScript(ctx, c, filepath.Join(dir, f.Name()))
+		if err != nil {
+			return nil, err
+		}
+
+		result = append(result, path)
 	}
 
 	return
 }
 
-func getTool(url, key string, args []string) (tool gptscript.ToolDef, _ error) {
+func getTool(ctx context.Context, url, key string, args []string) (tool gptscript.ToolDef, _ error) {
 	c, err := gptscript.NewGPTScript(gptscript.GlobalOptions{
 		OpenAIBaseURL: url,
 		OpenAIAPIKey:  key,
@@ -122,7 +153,7 @@ func getTool(url, key string, args []string) (tool gptscript.ToolDef, _ error) {
 		return tool, errors.New("failed to find tool " + mainAgent)
 	}
 
-	toolsFromConfig, err := agentsFromHomeConfig()
+	toolsFromConfig, err := agentsFromHomeConfig(ctx, c)
 	if err != nil {
 		return tool, err
 	}
@@ -130,8 +161,17 @@ func getTool(url, key string, args []string) (tool gptscript.ToolDef, _ error) {
 	tool.Agents = append(tool.Agents, toolsFromConfig...)
 
 	if len(args) > 0 {
+		var newArgs []string
+		for _, arg := range args {
+			newArg, err := validateScript(ctx, c, arg)
+			if err != nil {
+				return tool, err
+			}
+			newArgs = append(newArgs, newArg)
+		}
+
 		return gptscript.ToolDef{
-			Agents: append(args, tool.Agents...),
+			Agents: append(newArgs, tool.Agents...),
 		}, nil
 	}
 

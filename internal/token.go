@@ -22,6 +22,7 @@ import (
 
 const (
 	AppName          = "clio"
+	Context          = "github.com/gptscript-ai/" + AppName + "/context"
 	proxyURL         = "https://clio-proxy.gptscript.ai"
 	oauthServiceName = "GitHub"
 )
