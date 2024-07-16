@@ -16,4 +16,4 @@ name: environment
 #!/bin/bash
 
 echo "Current gcloud config:"
-gcloud config list
+gcloud config list || true

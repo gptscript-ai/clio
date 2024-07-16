@@ -26,8 +26,8 @@ if [ -e .github/workflows ]; then
 fi
 
 echo "The following is the help text for the gh cli and some of its sub-commands. Use these when figuring out how to construct new commands.  Note that the --search flag is used for filtering and sorting as well; there is no dedicate --sort flag. If needed run --help for subcommands before you use them."
-gh --help
-gh repo --help
-gh issue --help
-gh pr create --help
-gh run --help
+gh --help || true
+gh repo --help || true
+gh issue --help || true
+gh pr create --help || true
+gh run --help || true

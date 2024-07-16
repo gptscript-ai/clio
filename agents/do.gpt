@@ -15,4 +15,4 @@ name: environment
 
 #!/bin/bash
 
-doctl --help
+doctl --help || true

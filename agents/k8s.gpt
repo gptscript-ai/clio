@@ -15,4 +15,4 @@ name: environment
 
 echo 'Your current kubeconfig ("kubectl config view" output):'
 echo
-kubectl config view
+kubectl config view || true
