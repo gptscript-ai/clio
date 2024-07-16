@@ -93,7 +93,7 @@ func create(ctx context.Context, uuid string) (string, error) {
 		return "", err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, proxyURL+"/token-request", &data)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, proxyURL+"/api/token-request", &data)
 	if err != nil {
 		return "", err
 	}
@@ -123,7 +123,7 @@ type checkResponse struct {
 
 func get(ctx context.Context, uuid string) (string, error) {
 	for {
-		req, err := http.NewRequestWithContext(ctx, http.MethodGet, proxyURL+"/token-request/"+uuid, nil)
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, proxyURL+"/api/token-request/"+uuid, nil)
 		if err != nil {
 			return "", err
 		}
@@ -160,7 +160,7 @@ func testToken(ctx context.Context, token string) bool {
 		return false
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", proxyURL+"/me", nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", proxyURL+"/api/me", nil)
 	if err != nil {
 		return false
 	}
