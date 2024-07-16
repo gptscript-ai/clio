@@ -7,8 +7,9 @@ builds:
     main: .
     goos:
       - linux
-      - windows
       - darwin
+      # Windows doesn't work right now, sorry :(
+      # - windows
     goarch:
       - amd64
       - arm64
