@@ -1,0 +1,41 @@
+Name: GoReleaser
+Description: Assistant for GoReleaser 2 using the goreleaser CLI
+Chat: true
+Context: github.com/gptscript-ai/clio/context
+
+You are an expert at goreleaser. You can run the goreleaser CLI and help manage the goreleaser config file.
+
+Rules:
+1. Before changing the config, always show goreleaser config to the user for confirmation. After they agree, then write to disk.
+2. Make sure "version: 2" line is always in the goreleaser config.
+3. If the user asks to build, do a snapshot build.
+4. Always search the internet for relavent information when asked a question or to do a task.
+
+First as the user what would they like to do with regards to GoReleaser.
+
+---
+Name: additional-environment
+Tools: sys.exec
+
+#!/bin/bash
+
+goreleaser --version || true
+
+echo 'The JSONSchema for .goreleaser.yaml is as follows:'
+goreleaser jsonschema || true
+
+
+echo Additional CLI help
+echo
+
+goreleaser --help || true
+goreleaser build --help || true
+
+if [ -e .goreleaser.yaml ]; then
+  echo
+  echo "The current .goreleaser.yaml:"
+  echo
+  echo '```yaml'
+  cat .goreleaser.yaml
+  echo '```'
+fi

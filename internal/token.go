@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/adrg/xdg"
+	"github.com/fatih/color"
 	"github.com/google/uuid"
 	"github.com/pkg/browser"
 )
@@ -26,6 +27,24 @@ const (
 	proxyURL         = "https://clio-proxy.gptscript.ai"
 	oauthServiceName = "GitHub"
 )
+
+func enter(ctx context.Context) error {
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := fmt.Scanln()
+		done <- err
+	}()
+
+	select {
+	case <-ctx.Done():
+		return ctx.Err()
+	case err := <-done:
+		return err
+	}
+}
 
 func TokenAndURL(ctx context.Context, appName string) (string, string, error) {
 	ctx, sigCancel := signal.NotifyContext(ctx, os.Interrupt)
@@ -56,13 +75,18 @@ func TokenAndURL(ctx context.Context, appName string) (string, string, error) {
 	}
 
 	if !existed {
-		fmt.Printf("You need to authenticate to use %s. We will open a browser now so you can log in through GitHub."+
-			"\nIf you don't wish to do this you can use your own OpenAI"+" API key instead, refer to `%s --help` for more information."+
-			"\n\nPress ENTER to continue or CTRL+C to exit.\n", AppName, AppName)
-
-		if _, err := fmt.Scanln(); err != nil {
-			return "", "", fmt.Errorf("input error: %w", err)
+		fmt.Println()
+		fmt.Println(color.GreenString("Authentication is needed"))
+		fmt.Println(color.GreenString("========================"))
+		fmt.Println()
+		fmt.Println(color.CyanString("GitHub") + " is used for authentication using the browser. This can be bypassed by setting")
+		fmt.Println("the env var " + color.CyanString("OPENAI_API_KEY") + " to your API key.")
+		fmt.Println()
+		fmt.Println(color.GreenString("Press ENTER to continue (CTRL+C to exit)"))
+		if err := enter(ctx); err != nil {
+			return "", "", err
 		}
+		fmt.Println()
 	}
 
 	fmt.Printf("Opening browser to %s. if there is an issue paste this link into a browser manually\n", loginURL)
