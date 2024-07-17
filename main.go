@@ -43,6 +43,11 @@ type Clio struct {
 	LogFile string `usage:"Event log file"`
 }
 
+func (c Clio) Customize(cmd *cobra.Command) {
+	cmd.Use = "clio [flags] [CUSTOM_AGENT_FILE...]"
+	cmd.Short = "Clio - AI powered assistant for your command line."
+}
+
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 	if c.APIKey == "" {
 		fmt.Println(color.YellowString("Checking authentication..."))
@@ -52,7 +57,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	fmt.Println(color.YellowString("Starting up... (first run takes longer, like a minute, be patient this will get faster)"))
+	fmt.Println(color.YellowString("Starting up... (first run takes longer, like a minute, be patient this will get faster next time)"))
 
 	tool, err := getTool(cmd.Context(), c.BaseURL, c.APIKey, args)
 	if err != nil {
