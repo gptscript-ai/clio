@@ -33,11 +33,11 @@ To start Clio, simply run:
 clio
 ```
 
-Clio will prompt you to authenticate with OpenAI if you haven't provided an API key. You can also set the API key and base URL using environment variables:
+Clio will prompt you to authenticate with GitHub if you haven't provided an OpenAI API key. You can also set a custom personal API key and base URL using environment variables:
 
 ```bash
 export OPENAI_API_KEY=your-api-key
-export OPENAI_BASE_URL=https://api.openai.com
+export OPENAI_BASE_URL=https://api.openai.com/v1
 ```
 
 ## Extending
