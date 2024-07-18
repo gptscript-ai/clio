@@ -1,4 +1,4 @@
-# Clio - Your friendly and safe CLI Assistant
+# Clio - Your friendly and safe CLI Copilot
 
 Clio is an AI-powered assistant designed to help you with DevOps-related tasks using CLI programs. It leverages OpenAI's capabilities to provide intelligent assistance directly from your command line.
 
