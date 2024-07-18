@@ -85,9 +85,13 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 }
 
 func validateScript(ctx context.Context, c gptscript.GPTScript, path string) (string, error) {
-	absPath, err := filepath.Abs(path)
-	if err != nil {
-		return "", err
+	absPath := path
+
+	if _, err := os.Stat(path); err == nil {
+		absPath, err = filepath.Abs(path)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	nodes, err := c.Parse(ctx, absPath)
