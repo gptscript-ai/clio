@@ -1,6 +1,8 @@
-# Clio - AI Powered Assistant for Your Command Line
+# Clio - Your friendly and safe CLI Assistant
 
 Clio is an AI-powered assistant designed to help you with DevOps-related tasks using CLI programs. It leverages OpenAI's capabilities to provide intelligent assistance directly from your command line.
+
+> **Note:** Clio is designed to safely perform actions. It won't do anything without your confirmation first.
 
 [![asciicast](https://asciinema.org/a/W9kebisfR3UnaAX1GxxulFXjc.svg)](https://asciinema.org/a/W9kebisfR3UnaAX1GxxulFXjc?t=1)
 
