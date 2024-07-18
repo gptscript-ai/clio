@@ -46,6 +46,7 @@ type Clio struct {
 func (c Clio) Customize(cmd *cobra.Command) {
 	cmd.Use = "clio [flags] [CUSTOM_AGENT_FILE...]"
 	cmd.Short = "Clio - AI powered assistant for your command line."
+	cmd.Version = version
 }
 
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
@@ -183,9 +184,12 @@ func getTool(ctx context.Context, url, key string, args []string) (tool gptscrip
 	return tool, nil
 }
 
+var version = "dev" // default value
+
 func main() {
 	if embedded.Run(embedded.Options{FS: internalFS{}}) {
 		return
 	}
+	fmt.Printf("Clio version: %s\n\n", version)
 	cmd.Main(cmd.Command(&Clio{}))
 }
