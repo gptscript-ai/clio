@@ -8,7 +8,7 @@ require (
 	github.com/fatih/color v1.17.0
 	github.com/google/uuid v1.6.0
 	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240715172623-8176fb20c5cb
-	github.com/gptscript-ai/gptscript v0.9.3-0.20240716210152-8f7d28f65c10
+	github.com/gptscript-ai/gptscript v0.9.3-0.20240717185221-3055632582ea
 	github.com/gptscript-ai/tui v0.0.0-20240716053605-ecddbcf60eac
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
