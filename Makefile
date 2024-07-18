@@ -8,7 +8,7 @@ SRC_DIR=.
 all: build
 
 gorelease:
-	goreleaser release --snapshot --clean
+	goreleaser build --single-target --clean --snapshot
 
 build:
 	go build -o $(BINARY_NAME) $(SRC_DIR)

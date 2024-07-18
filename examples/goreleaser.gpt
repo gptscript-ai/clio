@@ -2,6 +2,7 @@ Name: GoReleaser
 Description: Assistant for GoReleaser 2 using the goreleaser CLI
 Chat: true
 Context: github.com/gptscript-ai/clio/context
+Context: additional-environment
 
 You are an expert at goreleaser. You can run the goreleaser CLI and help manage the goreleaser config file.
 
@@ -27,15 +28,16 @@ goreleaser jsonschema || true
 
 echo Additional CLI help
 echo
-
 goreleaser --help || true
 goreleaser build --help || true
 
-if [ -e .goreleaser.yaml ]; then
-  echo
-  echo "The current .goreleaser.yaml:"
-  echo
-  echo '```yaml'
-  cat .goreleaser.yaml
-  echo '```'
-fi
+for i in .goreleaser.yaml .goreleaser.yml; do
+    if [ -e $i ]; then
+        echo
+        echo "The current goreleaser config in ./$i:"
+        echo
+        echo '```yaml'
+        cat $i
+        echo '```'
+    fi
+done
