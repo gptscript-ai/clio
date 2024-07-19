@@ -1,6 +1,6 @@
 Name: K8s
 Chat: true
-Description: Kubernetes assistent using kubectl, helm, and other CLIs
+Description: Kubernetes agent using kubectl, helm, and other CLIs
 Context: ../context
 Context: ../context/k8s-cmds.gpt
 Context: environment

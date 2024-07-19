@@ -1,5 +1,5 @@
 name: AWS
-description: AWS assistant using awscli
+description: AWS agent using awscli
 context: ../context
 context: environment
 chat: true

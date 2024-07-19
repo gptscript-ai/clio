@@ -1,5 +1,5 @@
 name: GCP
-description: Google Cloud Platform assistant using gcloud CLI
+description: Google Cloud Platform agent using gcloud CLI
 context: ../context
 context: environment
 chat: true

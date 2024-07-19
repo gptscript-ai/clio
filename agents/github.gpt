@@ -1,5 +1,5 @@
 Name: GitHub
-Description: GitHub assistant using the gh CLI and other tools
+Description: GitHub agent using the gh CLI and other tools
 Context: ../context
 Context: workflows
 chat: true

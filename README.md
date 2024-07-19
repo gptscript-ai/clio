@@ -1,6 +1,6 @@
 # Clio - Your friendly and safe CLI Copilot
 
-Clio is an AI-powered assistant designed to help you with DevOps-related tasks using CLI programs. It leverages OpenAI's capabilities to provide intelligent assistance directly from your command line.
+Clio is an AI-powered copilot designed to help you with DevOps-related tasks using CLI programs. It leverages OpenAI's capabilities to provide intelligent assistance directly from your command line.
 
 > **Note:** Clio is designed to safely perform actions. It won't do anything without your confirmation first.
 
@@ -73,7 +73,7 @@ The GPTScript starts with a metadata block that defines the name of the agent, a
 
 ```gptscript
 Name: GoReleaser
-Description: Assistant for GoReleaser 2 using the goreleaser CLI
+Description: Agent for GoReleaser 2 using the goreleaser CLI
 Chat: true
 Context: github.com/gptscript-ai/clio/context
 
@@ -96,7 +96,7 @@ In the below example, we add a new line for `context: additional-environment` to
 
 ```gptscript
 Name: GoReleaser
-Description: Assistant for GoReleaser 2 using the goreleaser CLI
+Description: Agent for GoReleaser 2 using the goreleaser CLI
 Chat: true
 Context: github.com/gptscript-ai/clio/context
 Context: additional-environment

@@ -1,5 +1,5 @@
 name: DO
-description: DigitalOcean assistant using the doctl CLI
+description: DigitalOcean agent using the doctl CLI
 context: ../context
 context: environment
 chat: true
