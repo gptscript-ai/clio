@@ -166,6 +166,8 @@ github.com/gptscript-ai/go-gptscript v0.9.3-0.20240722014125-d757d09f606b h1:Hxu
 github.com/gptscript-ai/go-gptscript v0.9.3-0.20240722014125-d757d09f606b/go.mod h1:Dh6vYRAiVcyC3ElZIGzTvNF1FxtYwA07BHfSiFKQY7s=
 github.com/gptscript-ai/gptscript v0.9.3-0.20240722050411-f3194f7d599f h1:BU5gz54xcSgVrkWMReMpK2Cw7IgYEajImoWlTtK2pfc=
 github.com/gptscript-ai/gptscript v0.9.3-0.20240722050411-f3194f7d599f/go.mod h1:GK9q8o6sE8cVsSRmk3blxDpPshx1ZmRlRyLXK/nOpFc=
+github.com/gptscript-ai/gptscript v0.9.3-0.20240722193700-84b2aa35376d h1:3SalGNw+1b6jNhYRZRrtAm/o3f6jC5051C9vFQC0ZyQ=
+github.com/gptscript-ai/gptscript v0.9.3-0.20240722193700-84b2aa35376d/go.mod h1:GK9q8o6sE8cVsSRmk3blxDpPshx1ZmRlRyLXK/nOpFc=
 github.com/gptscript-ai/tui v0.0.0-20240722050940-a4bafce0b0a1 h1:O2pLwP4wLCmX/Fi5tIVdrcyy1Oh/ymPTVCW1arMzFCg=
 github.com/gptscript-ai/tui v0.0.0-20240722050940-a4bafce0b0a1/go.mod h1:sP/9g7+nLq65aGef5F30AEG+Cuu4BwlglUYv1Pzps4Y=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=

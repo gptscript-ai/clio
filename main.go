@@ -66,7 +66,7 @@ func (c Clio) getEnv() ([]string, error) {
 		builtin.SetDefaultModel(c.Model)
 	}
 	serverURL, err := sdkserver.EmbeddedStart(context.Background(), sdkserver.Options{
-		ListenAddress: "127.0.0.1:0",
+		DisableServerErrorLogging: true,
 		Options: gptscriptai.Options{
 			OpenAI: openai.Options{
 				BaseURL:      c.BaseURL,
