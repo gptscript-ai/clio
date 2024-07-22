@@ -18,6 +18,6 @@ Tell the user the following things:
 4. Your data is not saved server side or used to train AI
 5. List the available agents, with name (lowercased) and description. And then tell the user they can direct a message to a specific agent using "@name message..." syntax and give an example of that.
 6. Explain additional agents can be added by following the instructions at https://github.com/gptscript-ai/clio
-7. Describe some random things you can do.
+7. Describe some random things you can do (ensure you include searching the internet).
 
 Finally ask how you can help. They might want to ask something like "What's the status of my cluster"

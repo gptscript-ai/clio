@@ -16,7 +16,12 @@ import (
 	"github.com/fatih/color"
 	"github.com/gptscript-ai/clio/internal"
 	"github.com/gptscript-ai/go-gptscript"
+	"github.com/gptscript-ai/gptscript/pkg/builtin"
 	"github.com/gptscript-ai/gptscript/pkg/embedded"
+	gptscriptai "github.com/gptscript-ai/gptscript/pkg/gptscript"
+	"github.com/gptscript-ai/gptscript/pkg/mvl"
+	"github.com/gptscript-ai/gptscript/pkg/openai"
+	"github.com/gptscript-ai/gptscript/pkg/sdkserver"
 	"github.com/gptscript-ai/tui"
 	"github.com/spf13/cobra"
 )
@@ -40,6 +45,7 @@ func (internalFS) Open(name string) (fs.File, error) {
 type Clio struct {
 	BaseURL string `usage:"OpenAI base URL" name:"openai-base-url" env:"OPENAI_BASE_URL"`
 	APIKey  string `usage:"OpenAI API KEY" name:"openai-api-key" env:"OPENAI_API_KEY"`
+	Model   string `usage:"OpenAI Model" name:"openai-model" env:"OPENAI_MODEL"`
 	LogFile string `usage:"Event log file"`
 }
 
@@ -47,6 +53,45 @@ func (c Clio) Customize(cmd *cobra.Command) {
 	cmd.Use = "clio [flags] [CUSTOM_AGENT_FILE...]"
 	cmd.Short = "Clio - AI powered assistant for your command line."
 	cmd.Version = version
+}
+
+func (c Clio) getEnv() ([]string, error) {
+	env := os.Environ()
+	if os.Getenv("GPTSCRIPT_URL") != "" {
+		return env, nil
+	}
+
+	mvl.SetError()
+	if c.Model != "" {
+		builtin.SetDefaultModel(c.Model)
+	}
+	serverURL, err := sdkserver.EmbeddedStart(context.Background(), sdkserver.Options{
+		ListenAddress: "127.0.0.1:0",
+		Options: gptscriptai.Options{
+			OpenAI: openai.Options{
+				BaseURL:      c.BaseURL,
+				APIKey:       c.APIKey,
+				DefaultModel: c.Model,
+			},
+			Env: env,
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	for _, newEnv := range []string{
+		"GPTSCRIPT_DISABLE_SERVER=true",
+		"GPTSCRIPT_URL=" + serverURL,
+	} {
+		k, v, _ := strings.Cut(newEnv, "=")
+		if err := os.Setenv(k, v); err != nil {
+			return nil, err
+		}
+		env = append(env, newEnv)
+	}
+
+	return env, nil
 }
 
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
@@ -58,9 +103,14 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	fmt.Println(color.YellowString("Starting up... (first run takes longer, like a minute, be patient this will get faster next time)"))
+	fmt.Println(color.GreenString(fmt.Sprintf("> Initializing %s (version %s)...", internal.AppName, version)))
 
-	tool, err := getTool(cmd.Context(), c.BaseURL, c.APIKey, args)
+	env, err := c.getEnv()
+	if err != nil {
+		return err
+	}
+
+	tool, err := getTool(cmd.Context(), c.BaseURL, c.APIKey, env, args)
 	if err != nil {
 		return err
 	}
@@ -78,13 +128,15 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		},
 		OpenAIBaseURL: c.BaseURL,
 		OpenAIAPIKey:  c.APIKey,
+		DefaultModel:  c.Model,
 		Workspace:     workspace,
 		Location:      mainAgent,
 		EventLog:      c.LogFile,
+		Env:           env,
 	})
 }
 
-func validateScript(ctx context.Context, c gptscript.GPTScript, path string) (string, error) {
+func validateScript(ctx context.Context, c *gptscript.GPTScript, path string) (string, error) {
 	absPath := path
 
 	if _, err := os.Stat(path); err == nil {
@@ -113,7 +165,7 @@ func validateScript(ctx context.Context, c gptscript.GPTScript, path string) (st
 		"tool definition", path, internal.Context)
 }
 
-func agentsFromHomeConfig(ctx context.Context, c gptscript.GPTScript) (result []string, _ error) {
+func agentsFromHomeConfig(ctx context.Context, c *gptscript.GPTScript) (result []string, _ error) {
 	dir, err := xdg.ConfigFile(internal.AppName + "/agents")
 	if err != nil {
 		return nil, err
@@ -138,15 +190,16 @@ func agentsFromHomeConfig(ctx context.Context, c gptscript.GPTScript) (result []
 	return
 }
 
-func getTool(ctx context.Context, url, key string, args []string) (tool gptscript.ToolDef, _ error) {
+func getTool(ctx context.Context, url, key string, env, args []string) (tool gptscript.ToolDef, _ error) {
 	c, err := gptscript.NewGPTScript(gptscript.GlobalOptions{
 		OpenAIBaseURL: url,
 		OpenAIAPIKey:  key,
+		Env:           env,
 	})
 	if err != nil {
 		return tool, err
 	}
-	// purposely not closing client otherwise it does a start/stop thing and I don't like that
+	defer c.Close()
 
 	nodes, err := c.Parse(context.Background(), mainAgent)
 	if err != nil {
@@ -194,6 +247,5 @@ func main() {
 	if embedded.Run(embedded.Options{FS: internalFS{}}) {
 		return
 	}
-	fmt.Printf("Clio version: %s\n\n", version)
 	cmd.Main(cmd.Command(&Clio{}))
 }
