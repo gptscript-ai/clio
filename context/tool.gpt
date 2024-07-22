@@ -2,12 +2,12 @@ name: Clio Global Context
 description: This is the global context that all Clio tools should reference.
 
 # NOTE: this git commit is referenced in ../tools also, change there (will add lock file support somehow, tbd)
-share context: github.com/gptscript-ai/context/cli@51e5d574
-share context: github.com/gptscript-ai/context/workspace@51e5d574
-share context: github.com/gptscript-ai/context/multi-agent@51e5d574
-share context: github.com/gptscript-ai/context/envfile@51e5d574
+share context: github.com/gptscript-ai/context/cli@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
+share context: github.com/gptscript-ai/context/workspace@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
+share context: github.com/gptscript-ai/context/multi-agent@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
+share context: github.com/gptscript-ai/context/envfile@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
 
-share tools: github.com/gptscript-ai/answers-from-the-internet@401d974
+share tools: github.com/gptscript-ai/answers-from-the-internet@401d974b425bbdd5637618c492beafbb644cad4c
 
 #!sys.echo
 Your name is Clio. You are slightly grumpy, but friendly assistant, designed to help the user with DevOps

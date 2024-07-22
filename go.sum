@@ -164,10 +164,10 @@ github.com/gptscript-ai/cmd v0.0.0-20240625175447-4250b42feb7d h1:sKf7T7twhGXs6A
 github.com/gptscript-ai/cmd v0.0.0-20240625175447-4250b42feb7d/go.mod h1:DJAo1xTht1LDkNYFNydVjTHd576TC7MlpsVRl3oloVw=
 github.com/gptscript-ai/go-gptscript v0.9.3-0.20240722014125-d757d09f606b h1:Hxu8oPE43uQ2sZ7P+9yGSX9bXh0RoJfOgvY/SlCwFlM=
 github.com/gptscript-ai/go-gptscript v0.9.3-0.20240722014125-d757d09f606b/go.mod h1:Dh6vYRAiVcyC3ElZIGzTvNF1FxtYwA07BHfSiFKQY7s=
-github.com/gptscript-ai/gptscript v0.9.3-0.20240722015951-7c5da261cedb h1:lMRri9oxfpz28BNYwrx+iXZ8/OpjedCRJbzdVPb8lKk=
-github.com/gptscript-ai/gptscript v0.9.3-0.20240722015951-7c5da261cedb/go.mod h1:GK9q8o6sE8cVsSRmk3blxDpPshx1ZmRlRyLXK/nOpFc=
-github.com/gptscript-ai/tui v0.0.0-20240722014329-d50b5ac5db74 h1:69BENZCN2y4BCxmPjMRp+ZQ47ay4i5gRgREKZatu5oE=
-github.com/gptscript-ai/tui v0.0.0-20240722014329-d50b5ac5db74/go.mod h1:sP/9g7+nLq65aGef5F30AEG+Cuu4BwlglUYv1Pzps4Y=
+github.com/gptscript-ai/gptscript v0.9.3-0.20240722050411-f3194f7d599f h1:BU5gz54xcSgVrkWMReMpK2Cw7IgYEajImoWlTtK2pfc=
+github.com/gptscript-ai/gptscript v0.9.3-0.20240722050411-f3194f7d599f/go.mod h1:GK9q8o6sE8cVsSRmk3blxDpPshx1ZmRlRyLXK/nOpFc=
+github.com/gptscript-ai/tui v0.0.0-20240722050940-a4bafce0b0a1 h1:O2pLwP4wLCmX/Fi5tIVdrcyy1Oh/ymPTVCW1arMzFCg=
+github.com/gptscript-ai/tui v0.0.0-20240722050940-a4bafce0b0a1/go.mod h1:sP/9g7+nLq65aGef5F30AEG+Cuu4BwlglUYv1Pzps4Y=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=

@@ -96,14 +96,14 @@ func (c Clio) getEnv() ([]string, error) {
 
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 	if c.APIKey == "" {
-		fmt.Println(color.YellowString("Checking authentication..."))
+		fmt.Println(color.YellowString("> Checking authentication..."))
 		c.APIKey, c.BaseURL, err = internal.TokenAndURL(cmd.Context(), internal.AppName)
 		if err != nil {
 			return err
 		}
 	}
 
-	fmt.Println(color.GreenString(fmt.Sprintf("> Initializing %s (version %s)...", internal.AppName, version)))
+	fmt.Println(color.GreenString(fmt.Sprintf("> Starting %s (version %s)...", internal.AppName, version)))
 
 	env, err := c.getEnv()
 	if err != nil {
@@ -131,6 +131,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		DefaultModel:  c.Model,
 		Workspace:     workspace,
 		Location:      mainAgent,
+		LoadMessage:   color.GreenString("> Loading program and setting up dependencies...\n"),
 		EventLog:      c.LogFile,
 		Env:           env,
 	})
