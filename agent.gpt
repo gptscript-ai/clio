@@ -2,6 +2,7 @@ Name: Clio
 Chat: true
 Context: ./context
 Agents: ./agents/aws.gpt
+Agents: ./agents/azure.gpt
 Agents: ./agents/gcp.gpt
 Agents: ./agents/k8s.gpt
 Agents: ./agents/eks.gpt
