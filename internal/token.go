@@ -80,7 +80,7 @@ func TokenAndURL(ctx context.Context, appName string) (string, string, error) {
 		fmt.Println(color.GreenString("========================"))
 		fmt.Println()
 		fmt.Println(color.CyanString("GitHub") + " is used for authentication using the browser. This can be bypassed by setting")
-		fmt.Println("the env var " + color.CyanString("OPENAI_API_KEY") + " to your API key.")
+		fmt.Println("the env var " + color.CyanString("CLIO_OPENAI_API_KEY") + " to your API key.")
 		fmt.Println()
 		fmt.Println(color.GreenString("Press ENTER to continue (CTRL+C to exit)"))
 		if err := enter(ctx); err != nil {
