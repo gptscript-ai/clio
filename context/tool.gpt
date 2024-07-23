@@ -2,10 +2,10 @@ name: Clio Global Context
 description: This is the global context that all Clio tools should reference.
 
 # NOTE: this git commit is referenced in ../tools also, change there (will add lock file support somehow, tbd)
-share context: github.com/gptscript-ai/context/cli@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
-share context: github.com/gptscript-ai/context/workspace@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
-share context: github.com/gptscript-ai/context/multi-agent@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
-share context: github.com/gptscript-ai/context/envfile@51e5d574a40d7a3debd5ebd90a6318a8b5f5440c
+share context: github.com/gptscript-ai/context/cli@4d2e83eae5380a14f6453df825b01d004c4acfa5
+share context: github.com/gptscript-ai/context/workspace@4d2e83eae5380a14f6453df825b01d004c4acfa5
+share context: github.com/gptscript-ai/context/multi-agent@4d2e83eae5380a14f6453df825b01d004c4acfa5
+share context: github.com/gptscript-ai/context/envfile@4d2e83eae5380a14f6453df825b01d004c4acfa5
 
 share tools: github.com/gptscript-ai/answers-from-the-internet@401d974b425bbdd5637618c492beafbb644cad4c
 share tools: github.com/gptscript-ai/browser@e874295db16cc8d3ce77f6912054c64a6ee13b32
