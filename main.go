@@ -94,6 +94,24 @@ func (c Clio) getEnv() ([]string, error) {
 	return env, nil
 }
 
+func (c Clio) mkWorkspace() (string, error) {
+	workspace, err := xdg.ConfigFile(filepath.Join(internal.AppName, "workspace"))
+	if err != nil {
+		return "", err
+	}
+
+	settings := filepath.Join(workspace, "browsersettings.json")
+	if _, err := os.Stat(settings); os.IsNotExist(err) {
+		if err := os.MkdirAll(workspace, 0755); err != nil {
+			return "", err
+		}
+		return workspace, os.WriteFile(settings, []byte(`{"headless":true}`), 0644)
+	} else if err != nil {
+		return "", err
+	}
+	return workspace, nil
+}
+
 func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 	if c.APIKey == "" {
 		fmt.Println(color.YellowString("> Checking authentication..."))
@@ -115,7 +133,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	workspace, err := xdg.ConfigFile(filepath.Join(internal.AppName, "workspace"))
+	workspace, err := c.mkWorkspace()
 	if err != nil {
 		return err
 	}
