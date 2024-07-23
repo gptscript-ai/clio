@@ -43,9 +43,9 @@ func (internalFS) Open(name string) (fs.File, error) {
 }
 
 type Clio struct {
-	BaseURL string `usage:"OpenAI base URL" name:"openai-base-url" env:"OPENAI_BASE_URL"`
-	APIKey  string `usage:"OpenAI API KEY" name:"openai-api-key" env:"OPENAI_API_KEY"`
-	Model   string `usage:"OpenAI Model" name:"openai-model" env:"OPENAI_MODEL"`
+	BaseURL string `usage:"Custom OpenAI base URL (not required)" name:"openai-base-url" env:"CLIO_OPENAI_BASE_URL"`
+	APIKey  string `usage:"Custom OpenAI API KEY (not required)" name:"openai-api-key" env:"CLIO_OPENAI_API_KEY"`
+	Model   string `usage:"Custom OpenAI Model (not required)" name:"openai-model" env:"CLIO_OPENAI_MODEL"`
 	LogFile string `usage:"Event log file"`
 }
 
