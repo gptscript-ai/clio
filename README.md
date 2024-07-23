@@ -9,8 +9,12 @@ Clio is an AI-powered copilot designed to help you with DevOps-related tasks usi
 ## Features
 
 - **Kubernetes Management**: Interact with your Kubernetes clusters using `kubectl`, `helm`, and other CLIs.
-- **Cloud Integration**: Manage your AWS, GCP, and DigitalOcean resources.
-- **GitHub Integration**: Interact with your GitHub repositories.
+- **AWS Integration**: Manage your AWS resources using the `aws` CLI.
+- **Azure Integration**: Manage your Azure resources using the `az` CLI.
+- **Google Cloud Platform Integration**: Manage your GCP resources using the `gcloud` CLI.
+- **DigitalOcean Integration**: Manage your DigitalOcean resources using the `doctl` CLI.
+- **EKS Management**: Manage your EKS clusters in AWS using `eksctl` and `aws` CLI.
+- **GitHub Integration**: Interact with your GitHub repositories using the `gh` CLI.
 - **Easily Customizable**: Add new capabilities with no code.
 
 ## Installation
@@ -37,12 +41,10 @@ To start Clio, simply run:
 clio
 ```
 
-Clio will prompt you to authenticate with GitHub if you haven't provided an OpenAI API key. You can also set a custom personal API key and base URL using environment variables:
+## Authentication
 
-```bash
-export OPENAI_API_KEY=your-api-key
-export OPENAI_BASE_URL=https://api.openai.com/v1
-```
+Clio will prompt you to authenticate with GitHub to allow access to the AI model powering Clio. You can also set a custom personal OpenAI API key and base URL using environment variables,
+refer to `clio --help` for specific environment variable names.
 
 ## Extending
 
