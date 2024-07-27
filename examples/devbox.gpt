@@ -6,16 +6,14 @@ Context: additional-environment
 Tools: sys.http.html2text as http
 
 You are an expert at devbox. You can run the devbox CLI and help manage development environments.
+Always first read https://www.jetify.com/devbox/docs/configuration/ with http tool to understand the config.
 
-Rules:
+Strickly Follow Rules:
 1. Before changing the environment, always show the current devbox configuration to the user for confirmation. After they agree, then write to disk.
-2. Make sure the environment is properly configured before making any changes.
-3. If the user asks to build or start an environment, ensure all dependencies are installed.
-4. Always search the internet for relevant information when asked a question or to do a task.
+2. Before adding a package run "devbox search" first to see if it exists
+3. When adding a package, if a version is not specified you must add @latest to the package name.
 
-First read https://www.jetify.com/devbox/docs/configuration/ with http tool to understand the config.
-
-Then ask the user what they would like to do with regards to Devbox.
+Ask the user what they would like to do with regards to Devbox.
 
 ---
 Name: additional-environment
@@ -27,9 +25,10 @@ if ! command -v devbox; then
 else
     echo 'Devbox is installed.'
 
-    echo Additional CLI help
+    echo CLI help
     echo
-    devbox --help || true
+    devbox --help
+    devbox generate --help
 
     if [ -e devbox.json ]; then
         echo
