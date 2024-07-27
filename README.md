@@ -115,23 +115,30 @@ First ask the user what would they like to do with regards to GoReleaser.
 
 ---
 Name: additional-environment
-Tools: sys.exec
 
 #!/bin/bash
-goreleaser --version || true
-echo 'The JSONSchema for .goreleaser.yaml is as follows:'
-goreleaser jsonschema || true
-echo Additional CLI help
-echo
-goreleaser --help || true
-goreleaser build --help || true
-if [ -e .goreleaser.yaml ]; then
-  echo
-  echo "The current .goreleaser.yaml:"
-  echo
-  echo '```yaml'
-  cat .goreleaser.yaml
-  echo '```'
+
+if ! command -v goreleaser; then
+    echo 'Inform the user goreleaser is not installed or available on the path'
+else
+    goreleaser --version || true
+
+    echo 'The JSONSchema for .goreleaser.yaml is as follows:'
+    goreleaser jsonschema || true
+
+    echo Additional CLI help
+    echo
+    goreleaser --help || true
+    goreleaser build --help || true
+
+    if [ -e .goreleaser.yaml ]; then
+        echo
+        echo "The current .goreleaser.yaml:"
+        echo
+        echo '```yaml'
+        cat .goreleaser.yaml
+        echo '```'
+    fi
 fi
 ```
 
