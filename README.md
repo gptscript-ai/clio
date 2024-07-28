@@ -131,14 +131,16 @@ else
     goreleaser --help || true
     goreleaser build --help || true
 
-    if [ -e .goreleaser.yaml ]; then
-        echo
-        echo "The current .goreleaser.yaml:"
-        echo
-        echo '```yaml'
-        cat .goreleaser.yaml
-        echo '```'
-    fi
+    for i in .goreleaser.yaml .goreleaser.yml; do
+        if [ -e $i ]; then
+            echo
+            echo "The current goreleaser config in ./$i:"
+            echo
+            echo '```yaml'
+            cat $i
+            echo '```'
+        fi
+    done
 fi
 ```
 

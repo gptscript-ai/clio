@@ -1,5 +1,5 @@
 Name: GoReleaser
-Description: Assistant for GoReleaser 2 using the goreleaser CLI
+Description: Agent for GoReleaser 2 using the goreleaser CLI
 Chat: true
 Context: github.com/gptscript-ai/clio/context
 Context: additional-environment
@@ -10,34 +10,36 @@ Rules:
 1. Before changing the config, always show goreleaser config to the user for confirmation. After they agree, then write to disk.
 2. Make sure "version: 2" line is always in the goreleaser config.
 3. If the user asks to build, do a snapshot build.
-4. Always search the internet for relavent information when asked a question or to do a task.
+4. Always search the internet for relevant information when asked a question or to do a task.
 
-First as the user what would they like to do with regards to GoReleaser.
+First ask the user what would they like to do with regards to GoReleaser.
 
 ---
 Name: additional-environment
-Tools: sys.exec
 
 #!/bin/bash
 
-goreleaser --version || true
+if ! command -v goreleaser; then
+    echo 'Inform the user goreleaser is not installed or available on the path'
+else
+    goreleaser --version || true
 
-echo 'The JSONSchema for .goreleaser.yaml is as follows:'
-goreleaser jsonschema || true
+    echo 'The JSONSchema for .goreleaser.yaml is as follows:'
+    goreleaser jsonschema || true
 
+    echo Additional CLI help
+    echo
+    goreleaser --help || true
+    goreleaser build --help || true
 
-echo Additional CLI help
-echo
-goreleaser --help || true
-goreleaser build --help || true
-
-for i in .goreleaser.yaml .goreleaser.yml; do
-    if [ -e $i ]; then
-        echo
-        echo "The current goreleaser config in ./$i:"
-        echo
-        echo '```yaml'
-        cat $i
-        echo '```'
-    fi
-done
+    for i in .goreleaser.yaml .goreleaser.yml; do
+        if [ -e $i ]; then
+            echo
+            echo "The current goreleaser config in ./$i:"
+            echo
+            echo '```yaml'
+            cat $i
+            echo '```'
+        fi
+    done
+fi
