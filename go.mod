@@ -3,13 +3,13 @@ module github.com/gptscript-ai/clio
 go 1.22.4
 
 require (
-	github.com/acorn-io/cmd v0.0.0-20240625164600-6c594fbd857e
+	github.com/acorn-io/cmd v0.0.0-20240728043647-5ee22f336de6
 	github.com/adrg/xdg v0.4.0
 	github.com/fatih/color v1.17.0
 	github.com/google/uuid v1.6.0
-	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240722014125-d757d09f606b
-	github.com/gptscript-ai/gptscript v0.9.3-0.20240723195132-671f0f02a07b
-	github.com/gptscript-ai/tui v0.0.0-20240722050940-a4bafce0b0a1
+	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240728044543-20d868b5baa6
+	github.com/gptscript-ai/gptscript v0.9.3-0.20240728050206-2584308e6189
+	github.com/gptscript-ai/tui v0.0.0-20240728045051-19ba83cd96c1
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )

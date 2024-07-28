@@ -52,10 +52,10 @@ refer to `clio --help` for specific environment variable names.
 
 Clio is composed of multiple internal agents. There are several built-in agents that provide functionality for interacting with Kubernetes, AWS, GCP, GitHub, etc., but you can easily add your own agents to extend the functionality of Clio. The built-in agents are located in the [agents](./agents) directory, with each file being a separate agent. To create a custom agent, you must write a new [GPTScript](https://docs.gptscript.ai) and place it in the `$XDG_CONFIG_HOME/clio/agents` directory.
 
-| Operating System | Custom Agent Path |
-|------------------|-----------------------------------|
+| Operating System | Custom Agent Path                           |
+|------------------|---------------------------------------------|
 | macOS            | `~/Library/Application Support/clio/agents` |
-| Linux            | `~/.config/clio/agents`           |
+| Linux            | `~/.config/clio/agents`                     |
 
 ### Custom Agent
 
@@ -92,7 +92,7 @@ First ask the user what would they like to do with regards to GoReleaser.
 
 To test this agent out you can run `clio goreleaser.gpt`. After testing the agent, you can modify the text if you don't like the exhibited behavior. There is no defined format for the prompt. The fact that the example has the structure with "Rules" in it is just a convention but not technically required.
 
-To make the agent even more useful, you can extend the agent to have dynamic contextual information. To do this, we are going to add an additional "context tool" to the agent. Context tools add capabilities to the agent by prepending the output of the tool to the prompt.
+To make the agent even more useful, you can extend the agent to have dynamic contextual information. To do this, we are going to add another "context tool" to the agent. Context tools add capabilities to the agent by prepending the output of the tool to the prompt.
 
 In the below example, we add a new line for `context: additional-environment` to the metadata block. We then define the `additional-environment` context tool. This tool will show the user the current goreleaser version, the JSONSchema for the goreleaser config file, and the help output for the goreleaser CLI and the build subcommand. It will also show the user the current goreleaser config file if it exists.
 
@@ -142,7 +142,7 @@ else
 fi
 ```
 
-That is now our finished agent. You can place the `goreleaser.gpt` file in the `$XDG_CONFIG_HOME/clio/agents` directory and then the next time you run `clio` you will see your agent in the list of agents and it can be referenced by doing `@goreleaser <your question>`.
+That is now our finished agent. You can place the `goreleaser.gpt` file in the `$XDG_CONFIG_HOME/clio/agents` directory and then the next time you run `clio` you will see your agent in the list of agents, and it can be referenced by doing `@goreleaser <your question>`.
 
 ## License
 

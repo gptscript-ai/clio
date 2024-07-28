@@ -138,20 +138,28 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	return tui.Run(context.Background(), mainAgent, tui.RunOptions{
+	client, err := gptscript.NewGPTScript(gptscript.GlobalOptions{
+		OpenAIBaseURL: c.BaseURL,
+		OpenAIAPIKey:  c.APIKey,
+		DefaultModel:  c.Model,
+		Env:           env,
+	})
+	if err != nil {
+		return err
+	}
+
+	return tui.Run(cmd.Context(), mainAgent, tui.RunOptions{
+		Client:  client,
 		Eval:    []gptscript.ToolDef{tool},
 		AppName: internal.AppName,
 		TrustedRepoPrefixes: []string{
 			"github.com/gptscript-ai",
 		},
-		OpenAIBaseURL: c.BaseURL,
-		OpenAIAPIKey:  c.APIKey,
-		DefaultModel:  c.Model,
-		Workspace:     workspace,
-		Location:      mainAgent,
-		LoadMessage:   color.GreenString("> Loading program and setting up dependencies...\n"),
-		EventLog:      c.LogFile,
-		Env:           env,
+		Workspace:       workspace,
+		Location:        mainAgent,
+		LoadMessage:     color.GreenString("> Loading program and setting up dependencies...\n"),
+		EventLog:        c.LogFile,
+		ForceSequential: true,
 	})
 }
 
@@ -266,5 +274,5 @@ func main() {
 	if embedded.Run(embedded.Options{FS: internalFS{}}) {
 		return
 	}
-	cmd.Main(cmd.Command(&Clio{}))
+	cmd.MainCtx(context.Background(), cmd.Command(&Clio{}))
 }
