@@ -1,0 +1,27 @@
+name: On Failure
+
+on:
+  workflow_run:
+    workflows: ["GoReleaser Snapshot", "GoReleaser"]
+    types:
+      - completed
+
+jobs:
+  notify_failure:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Notify Failure
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Failing workflow ID: ${{ github.event.workflow_run.id }}"
+          echo "Commit SHA: ${{ github.event.workflow_run.head_commit.id }}"
+          go run github.com/gptscript-ai/gptscript@main --disable-tui github.com/ibuildthecloud/agents/fix-wf.gpt ${{ github.event.workflow_run.id }}
