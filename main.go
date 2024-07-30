@@ -27,7 +27,7 @@ import (
 )
 
 //go:embed agent.gpt context/*.gpt tools/*.gpt agents/*.gpt
-var emedFS embed.FS
+var embedFS embed.FS
 
 const (
 	mainAgent = "/internal/agent.gpt"
