@@ -27,7 +27,7 @@ import (
 )
 
 //go:embed agent.gpt context/*.gpt tools/*.gpt agents/*.gpt
-var emedFS embed.FS
+var embedFS embed.FS
 
 const (
 	mainAgent = "/internal/agent.gpt"
@@ -243,12 +243,12 @@ func getTool(ctx context.Context, url, key string, env, args []string) (tool gpt
 		return tool, errors.New("failed to find tool " + mainAgent)
 	}
 
-	toolsFromConfig, err := agentsFromHomeConfig(ctx, c)
+	agentsFromConfig, err := agentsFromHomeConfig(ctx, c)
 	if err != nil {
 		return tool, err
 	}
 
-	tool.Agents = append(tool.Agents, toolsFromConfig...)
+	tool.Agents = append(tool.Agents, agentsFromConfig...)
 
 	if len(args) > 0 {
 		var newArgs []string
@@ -261,7 +261,7 @@ func getTool(ctx context.Context, url, key string, env, args []string) (tool gpt
 		}
 
 		return gptscript.ToolDef{
-			Agents: append(newArgs, tool.Agents...),
+			agents: append(newArgs, tool.Agents...),
 		}, nil
 	}
 
