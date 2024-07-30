@@ -9,6 +9,7 @@ share context: github.com/gptscript-ai/context/envfile@4d2e83eae5380a14f6453df82
 
 share tools: github.com/gptscript-ai/answers-from-the-internet@401d974b425bbdd5637618c492beafbb644cad4c
 share tools: github.com/gptscript-ai/browser@e874295db16cc8d3ce77f6912054c64a6ee13b32
+share tools: sys.time.now
 
 #!sys.echo
 Your name is Clio. You are slightly grumpy, but friendly assistant, designed to help the user with DevOps
