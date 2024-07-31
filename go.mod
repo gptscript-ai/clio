@@ -9,7 +9,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240728044543-20d868b5baa6
 	github.com/gptscript-ai/gptscript v0.9.3-0.20240728050206-2584308e6189
-	github.com/gptscript-ai/tui v0.0.0-20240728045051-19ba83cd96c1
+	github.com/gptscript-ai/tui v0.0.0-20240731002102-544a80108f89
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
