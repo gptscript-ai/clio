@@ -7,9 +7,9 @@ require (
 	github.com/adrg/xdg v0.4.0
 	github.com/fatih/color v1.17.0
 	github.com/google/uuid v1.6.0
-	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240728044543-20d868b5baa6
-	github.com/gptscript-ai/gptscript v0.9.3-0.20240728050206-2584308e6189
-	github.com/gptscript-ai/tui v0.0.0-20240731002102-544a80108f89
+	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240731222146-b67275f3fa69
+	github.com/gptscript-ai/gptscript v0.9.4-0.20240801125858-4a42accfa0bd
+	github.com/gptscript-ai/tui v0.0.0-20240731223809-18baa902b9ab
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
@@ -84,6 +84,9 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
+	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
+	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
+	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/yuin/goldmark v1.5.4 // indirect
 	github.com/yuin/goldmark-emoji v1.0.2 // indirect

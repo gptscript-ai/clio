@@ -206,6 +206,10 @@ func agentsFromHomeConfig(ctx context.Context, c *gptscript.GPTScript) (result [
 	}
 
 	for _, f := range files {
+		if !strings.HasSuffix(f.Name(), ".gpt") {
+			continue
+		}
+
 		path, err := validateScript(ctx, c, filepath.Join(dir, f.Name()))
 		if err != nil {
 			return nil, err
