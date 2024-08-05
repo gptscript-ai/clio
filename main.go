@@ -15,6 +15,7 @@ import (
 	"github.com/adrg/xdg"
 	"github.com/fatih/color"
 	"github.com/gptscript-ai/clio/internal"
+	"github.com/gptscript-ai/clio/pkg/version"
 	"github.com/gptscript-ai/go-gptscript"
 	"github.com/gptscript-ai/gptscript/pkg/builtin"
 	"github.com/gptscript-ai/gptscript/pkg/embedded"
@@ -52,7 +53,7 @@ type Clio struct {
 func (c Clio) Customize(cmd *cobra.Command) {
 	cmd.Use = "clio [flags] [CUSTOM_AGENT_FILE...]"
 	cmd.Short = "Clio - AI powered assistant for your command line."
-	cmd.Version = version
+	cmd.Version = version.Get().String()
 }
 
 func (c Clio) getEnv() ([]string, error) {
@@ -121,7 +122,7 @@ func (c Clio) Run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	fmt.Println(color.GreenString(fmt.Sprintf("> Starting %s (version %s)...", internal.AppName, version)))
+	fmt.Println(color.GreenString(fmt.Sprintf("> Starting %s (version %s)...", internal.AppName, version.Get().String())))
 
 	env, err := c.getEnv()
 	if err != nil {
@@ -271,8 +272,6 @@ func getTool(ctx context.Context, url, key string, env, args []string) (tool gpt
 
 	return tool, nil
 }
-
-var version = "dev" // default value
 
 func main() {
 	if embedded.Run(embedded.Options{FS: internalFS{}}) {

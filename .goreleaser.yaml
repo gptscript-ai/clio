@@ -14,11 +14,11 @@ builds:
       - amd64
       - arm64
     ldflags:
-      - "-X 'main.version=v{{ .Version }}'"
+      - -X "github.com/gptscript-ai/clio/pkg/version.Tag=v{{ .Version }}"
 
 archives:
   - format: tar.gz
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
         format: zip
