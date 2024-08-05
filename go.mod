@@ -7,9 +7,9 @@ require (
 	github.com/adrg/xdg v0.4.0
 	github.com/fatih/color v1.17.0
 	github.com/google/uuid v1.6.0
-	github.com/gptscript-ai/go-gptscript v0.9.3-0.20240731222146-b67275f3fa69
-	github.com/gptscript-ai/gptscript v0.9.4-0.20240801125858-4a42accfa0bd
-	github.com/gptscript-ai/tui v0.0.0-20240731223809-18baa902b9ab
+	github.com/gptscript-ai/go-gptscript v0.9.4-0.20240801203434-840b14393b17
+	github.com/gptscript-ai/gptscript v0.9.4
+	github.com/gptscript-ai/tui v0.0.0-20240804004233-efc5673dc76e
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/spf13/cobra v1.8.0
 )
@@ -46,7 +46,7 @@ require (
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/gptscript-ai/broadcaster v0.0.0-20240625175512-c43682019b86 // indirect
 	github.com/gptscript-ai/chat-completion-client v0.0.0-20240531200700-af8e7ecf0379 // indirect
-	github.com/gptscript-ai/cmd v0.0.0-20240625175447-4250b42feb7d // indirect
+	github.com/gptscript-ai/cmd v0.0.0-20240802230653-326b7baf6fcb // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
