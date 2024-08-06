@@ -37,7 +37,7 @@ const (
 type internalFS struct{}
 
 func (internalFS) Open(name string) (fs.File, error) {
-	if name, ok := strings.CutPrefix(name, "/internal/"); ok {
+	if name, ok := strings.CutPrefix(strings.ReplaceAll(name, `\`, "/"), "/internal/"); ok {
 		return embedFS.Open(name)
 	}
 	return os.Open(name)
