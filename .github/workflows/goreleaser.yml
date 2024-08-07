@@ -1,12 +1,15 @@
-name: GoReleaser
+name: release
 
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
+
+permissions:
+  contents: write
 
 jobs:
-  release:
+  release-tag:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +31,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAP_GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
+  winget-release:
+      needs: release-tag
+      if: "! contains(github.ref_name, '-rc')"
+      runs-on: windows-latest
+      steps:
+        - name: Install winget-create
+          run: |
+              Invoke-WebRequest -Uri 'https://aka.ms/wingetcreate/latest' -OutFile 'wingetcreate.exe'      
+        - name: Create WinGet Package Update Pull Request
+          run: |
+              $url = "${{ github.server_url }}/${{ github.repository }}/releases/download/${{ github.ref_name }}/clio_${{ github.ref_name }}_windows_amd64.zip"
+              ./wingetcreate.exe update --submit --token "${{ secrets.WINGET_GH_TOKEN }}" --urls $url --version "${{ github.ref_name }}" gptscript-ai.clio
