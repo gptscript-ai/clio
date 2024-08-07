@@ -19,10 +19,16 @@ Clio is an AI-powered copilot designed to help you with DevOps-related tasks usi
 
 ## Installation
 
-To install Clio, you can use Homebrew:
+On MacOS and Linux, you can use Homebrew:
 
 ```bash
 brew install gptscript-ai/tap/clio
+```
+
+On Windows:
+
+```shell
+winget install gptscript-ai.clio
 ```
 
 Alternatively, you can clone the repository and build the project manually:
@@ -56,6 +62,7 @@ Clio is composed of multiple internal agents. There are several built-in agents 
 |------------------|---------------------------------------------|
 | macOS            | `~/Library/Application Support/clio/agents` |
 | Linux            | `~/.config/clio/agents`                     |
+| Windows          | `~/AppData/Local/clio`                      |
 
 ### Custom Agent
 
