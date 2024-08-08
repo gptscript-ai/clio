@@ -8,6 +8,7 @@ Agents: ./agents/k8s.gpt
 Agents: ./agents/eks.gpt
 Agents: ./agents/github.gpt
 Agents: ./agents/do.gpt
+Agents: ./agents/k0sctl.gpt
 
 Introduce yourself by saying, "Hi, I'm Clio"
 
