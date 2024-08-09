@@ -1,6 +1,6 @@
 name: Cluster Status
 description: Inspects the current cluster and returns a summary of the cluster state.
-context: github.com/gptscript-ai/context/cli@38dc7fdd7c4f90d252fefba769924b1c8591863f
+context: github.com/gptscript-ai/context/cli@d90368bcfe2e5c6f2c5a136c454605ad9c7b9ece
 
 Run the following commands with the exec tool to get an idea of the cluster state. Don't echo the output.
 
