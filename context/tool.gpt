@@ -1,5 +1,6 @@
 name: Clio Global Context
 description: This is the global context that all Clio tools should reference.
+type: context
 
 # NOTE: this git commit is referenced in ../tools also, change there (will add lock file support somehow, tbd)
 share context: github.com/gptscript-ai/context/cli@d90368bcfe2e5c6f2c5a136c454605ad9c7b9ece
