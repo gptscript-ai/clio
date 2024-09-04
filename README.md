@@ -13,6 +13,7 @@ Clio is an AI-powered copilot designed to help you with DevOps-related tasks usi
 - **Azure Integration**: Manage your Azure resources using the `az` CLI.
 - **Google Cloud Platform Integration**: Manage your GCP resources using the `gcloud` CLI.
 - **DigitalOcean Integration**: Manage your DigitalOcean resources using the `doctl` CLI.
+- **Exoscale Integration**: Manage your Exoscale resources using the `exo` CLI.
 - **EKS Management**: Manage your EKS clusters in AWS using `eksctl` and `aws` CLI.
 - **GitHub Integration**: Interact with your GitHub repositories using the `gh` CLI.
 - **Easily Customizable**: Add new capabilities with no code.

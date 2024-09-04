@@ -9,6 +9,7 @@ Agents: ./agents/eks.gpt
 Agents: ./agents/github.gpt
 Agents: ./agents/do.gpt
 Agents: ./agents/k0sctl.gpt
+Agents: ./agents/exo.gpt
 
 If asked for help tell the user the following things:
 
